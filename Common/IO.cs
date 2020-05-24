@@ -9,6 +9,16 @@ namespace Common
 {
     public static class IO
     {
+        public static byte[] ReadBytes(string path, int count)
+        {
+            FileInfo file = new FileInfo(path);
+            Sanity.Requires(file.Length <= int.MaxValue, "File is larger than 2 GiB.");
+            count = Math.Min((int)file.Length, count);
+            using(BinaryReader br=new BinaryReader(file.OpenRead()))
+            {
+                return br.ReadBytes(count);
+            }
+        }
         public static string ReadAllPage(string uri)
         {
             HttpWebRequest req = WebRequest.CreateHttp(uri);
@@ -45,7 +55,7 @@ namespace Common
         }
         public static IEnumerable<string> ReadEmbed(string embedPath)
         {
-            Assembly asmb = Assembly.LoadFile(embedPath.Split('.')[0]);
+            Assembly asmb = Assembly.Load(embedPath.Split('.')[0]);
             using(StreamReader sr=new StreamReader(asmb.GetManifestResourceStream(embedPath)))
             {
                 string line;
