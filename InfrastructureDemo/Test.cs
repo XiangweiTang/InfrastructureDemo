@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace InfrastructureDemo
 {
-    class Program
+    class Test
     {
-        static void Main(string[] args)
+        public Test()
         {
-            Test t = new Test();
+            Wave w = new Wave();
+            w.DeepParse(@"D:\Tmp\Audio\Work\Audios\1\0000_20191001093522.wav");
         }
     }
 }
