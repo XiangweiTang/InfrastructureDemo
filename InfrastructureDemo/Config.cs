@@ -8,5 +8,9 @@ namespace InfrastructureDemo
 {
     class Config
     {
+        public void Load(Argument arg)
+        {
+
+        }
     }
 }

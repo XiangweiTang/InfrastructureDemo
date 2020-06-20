@@ -63,5 +63,13 @@ namespace Common
                     yield return line;
             }
         }
+        public static IEnumerable<string[]> ReadEmbedClean(string embedPath)
+        {
+            foreach(string s in ReadEmbed(embedPath))
+            {
+                if (s[0] != '/' && s[1] != '/')
+                    yield return s.Split('\t');
+            }
+        }
     }
 }
