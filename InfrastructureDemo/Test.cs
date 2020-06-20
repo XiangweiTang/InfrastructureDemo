@@ -11,7 +11,6 @@ namespace InfrastructureDemo
     {
         public Test()
         {
-            LuaDataScript lds = new LuaDataScript();
         }
     }
 }
