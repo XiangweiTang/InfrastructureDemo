@@ -11,12 +11,12 @@ using Common;
 
 namespace InfrastructureDemo.Features.KMeans
 {
-    abstract class KMeans<Vector>:Feature
+    abstract class KMeans<TVector>:Feature
     {
         protected ConfigKMeans Cfg = new ConfigKMeans();
-        protected Vector[] VectorSequence = null;
+        protected TVector[] VectorSequence = null;
         protected int[] ClusterDistribute = null;
-        protected Vector[] ClusterMeans = null;        
+        protected TVector[] ClusterMeans = null;        
         protected int K = -1;
         bool ClusterChange = false;
         protected override void Load(Argument arg)
@@ -37,7 +37,7 @@ namespace InfrastructureDemo.Features.KMeans
             SetSequence();
             K = Cfg.K;
             ClusterDistribute = new int[VectorSequence.Length];
-            Vector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
+            TVector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
             ClusterMeans = VectorSequence.RandomSampleTinyIndex(3).Select(x => VectorSequence[x]).ToArray();            
         }
         
@@ -86,9 +86,9 @@ namespace InfrastructureDemo.Features.KMeans
                 Console.WriteLine(OutputVector(vector));
         }
         protected abstract void SetSequence();
-        protected abstract double VectorDistance(Vector v1, Vector v2);
-        protected abstract IEnumerable<Vector> OverallVectorMean();
-        protected abstract string OutputVector(Vector v);
+        protected abstract double VectorDistance(TVector v1, TVector v2);
+        protected abstract IEnumerable<TVector> OverallVectorMean();
+        protected abstract string OutputVector(TVector v);
         protected virtual void Plot() { }
         
     }
@@ -97,13 +97,11 @@ namespace InfrastructureDemo.Features.KMeans
     {
         protected override string OutputVector(PlainVector v)
         {
-            return $"X={v.X:0.000} Y={v.Y:0.000}";
+            return v.OutputVector();
         }
         protected override double VectorDistance(PlainVector v1, PlainVector v2)
         {
-            double dx = v1.X - v2.X;
-            double dy = v1.Y - v2.Y;
-            return Math.Sqrt(dx * dx + dy * dy);
+            return v1.GetDistance(v2);
         }
         protected override IEnumerable<PlainVector> OverallVectorMean()
         {
@@ -153,7 +151,7 @@ namespace InfrastructureDemo.Features.KMeans
     {
         protected override void SetSequence()
         {
-            string path = "InfrastructureDemo.Internal.KMeans.KMeansInput1.txt";
+            string path = "InfrastructureDemo.Internal.Sample.Sample1.txt";
             VectorSequence = IO.ReadEmbedClean(path).Select(x => new PlainVector { X = double.Parse(x[1]), Y = double.Parse(x[2]) }).ToArray();
         }
     }
