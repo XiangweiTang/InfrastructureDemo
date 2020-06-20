@@ -11,5 +11,8 @@ namespace InfrastructureDemo.Features.KMeans
         public int K { get; private set; } = 3;
         public int RoundThreashold { get; private set; } = 10;
         public double DistDiffThreshold { get; private set; } = -1;
+        public bool PrintVectors { get; private set; } = true;
+        public bool PrintMeans { get; private set; } = true;
+        public int CanvasSize { get; private set; } = 50;
     }
 }
