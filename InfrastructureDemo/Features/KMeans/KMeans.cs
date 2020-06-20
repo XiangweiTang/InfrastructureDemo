@@ -40,7 +40,7 @@ namespace InfrastructureDemo.Features.KMeans
             Clusters = new HashSet<int>[K];
             for (int i = 0; i < K; i++)
                 Clusters[i] = new HashSet<int>();
-            Vector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
+            //Vector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
             ClusterMeans = VectorSequence.RandomSampleTiny(K);
             KSeq = Enumerable.Range(0, K).ToArray();
         }
@@ -116,7 +116,7 @@ namespace InfrastructureDemo.Features.KMeans
 
     class KMeansSample : KMeans<PlainVector>
     {
-        char[] Dot = { '&', '#', 'X' };
+        char[] Dot = { '@', '#', 'X' };
         protected override string OutputVector(PlainVector v)
         {
             return $"{v.X} {v.Y}";
@@ -151,7 +151,7 @@ namespace InfrastructureDemo.Features.KMeans
 
         protected override void Plot()
         {
-            const int CANVAS_SIZE = 40;
+            const int CANVAS_SIZE = 50;
             char[,] Canvas = new char[CANVAS_SIZE, CANVAS_SIZE];
             Console.WriteLine("------------------------------");
             for (int i = 0; i < CANVAS_SIZE; i++)
