@@ -10,11 +10,16 @@ namespace Common
         {
             int x = canvas.GetLength(0);
             int y = canvas.GetLength(1);
-            for(int i = y - 1; i >= 0; i--)
+            
+            for(int i = 0; i < y; i++)
             {
-                for(int j = 0; j < x; j++)                
-                    Console.Write($"{canvas[j, i]} ");
-                Console.WriteLine();
+                StringBuilder sb = new StringBuilder(x);
+                for (int j = 0; j < x; j++)
+                {
+                    sb.Append(canvas[j, y - 1 - i]);
+                    sb.Append(' ');
+                }
+                Console.WriteLine(sb.ToString());
             }
         }
     }
