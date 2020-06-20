@@ -46,6 +46,8 @@
     <Compile Include="Argument.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Features\KMeans\ConfigKMeans.cs" />
+    <Compile Include="Features\KMeans\KMeans.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RerunableTaskSequence.cs" />
@@ -60,8 +62,9 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
+    <EmbeddedResource Include="Internal\KMeans\KMeansInput1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

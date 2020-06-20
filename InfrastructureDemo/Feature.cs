@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace InfrastructureDemo
 {
-    class Feature
+    abstract class Feature
     {
+        public void LoadAndRun(Argument arg)
+        {
+            Load(arg);
+            Run();
+        }
+
+        abstract protected void Load(Argument arg);
+        abstract protected void Run();
     }
 }
