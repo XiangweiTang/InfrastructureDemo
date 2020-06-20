@@ -17,10 +17,4 @@ namespace Common
             return list.Aggregate((x, y) => f(x).CompareTo(f(y)) < 0 ? x : y);
         }
     }
-
-    public struct PlainVector
-    {
-        public double X;
-        public double Y;
-    }
 }

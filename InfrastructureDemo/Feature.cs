@@ -13,7 +13,10 @@ namespace InfrastructureDemo
             Load(arg);
             Run();
         }
-
+        public void TestRun()
+        {
+            Run();
+        }
         abstract protected void Load(Argument arg);
         abstract protected void Run();
     }
