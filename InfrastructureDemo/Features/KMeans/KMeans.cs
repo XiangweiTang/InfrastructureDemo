@@ -159,10 +159,4 @@ namespace InfrastructureDemo.Features.KMeans
                 canvas.DrawPlain();
         }
     }
-
-    struct PlainVector
-    {
-        public double X;
-        public double Y;
-    }
 }
