@@ -11,8 +11,6 @@ namespace InfrastructureDemo
     {
         public Test()
         {
-            Features.KMeans.KMeansSample kms = new Features.KMeans.KMeansSample();
-            kms.LoadAndRun(null);
         }
     }
 }
