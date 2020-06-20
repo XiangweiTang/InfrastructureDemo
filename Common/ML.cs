@@ -10,18 +10,11 @@ namespace Common
     {
         public static TItem ArgMax<TItem, TResult>(this IEnumerable<TItem> list, Func<TItem,TResult> f) where TResult : IComparable<TResult>
         {
-            return ArgM(list, f, true);
+            return list.Aggregate((x, y) => f(x).CompareTo(f(y)) > 0 ? x : y);
         }
-        public static TItem ArgMin<TItem, TResult>(this IEnumerable<TItem> list,Func<TItem,TResult> f)where TResult : IComparable<TResult>
+        public static TItem ArgMin<TItem, TResult>(this IEnumerable<TItem> list, Func<TItem, TResult> f) where TResult : IComparable<TResult>
         {
-            return ArgM(list, f, false);
-        }
-        private static TItem ArgM<TItem, TResult>(this IEnumerable<TItem> list, Func<TItem, TResult> f, bool max) where TResult : IComparable<TResult>
-        {
-            var bestItem = max
-            ? list.Aggregate((x, y) => f(x).CompareTo(f(y)) > 0 ? x : y)
-            : list.Aggregate((x, y) => f(x).CompareTo(f(y)) < 0 ? x : y);
-            return bestItem;
+            return list.Aggregate((x, y) => f(x).CompareTo(f(y)) < 0 ? x : y);
         }
     }
 }
