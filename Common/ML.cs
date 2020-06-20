@@ -2,32 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Linq;
 
 namespace Common
 {
     public static class ML
     {
-        public static TItem ArgMax<TItem, TResult>(this IList<TItem> list, Func<TItem,TResult> f) where TResult : IComparable
+        public static TItem ArgMax<TItem, TResult>(this IEnumerable<TItem> list, Func<TItem,TResult> f) where TResult : IComparable<TResult>
         {
-            return ArgPeek(list, f, 1);
+            return ArgM(list, f, true);
         }
-        public static TItem ArgMin<TItem, TResult>(this IList<TItem> list,Func<TItem,TResult> f)where TResult : IComparable
+        public static TItem ArgMin<TItem, TResult>(this IEnumerable<TItem> list,Func<TItem,TResult> f)where TResult : IComparable<TResult>
         {
-            return ArgPeek(list, f, -1);
+            return ArgM(list, f, false);
         }
-        private static TItem ArgPeek<TItem, TResult>(this IList<TItem> list, Func<TItem, TResult> f, int sig) where TResult : IComparable
+        private static TItem ArgM<TItem, TResult>(this IEnumerable<TItem> list, Func<TItem, TResult> f, bool max) where TResult : IComparable<TResult>
         {
-            TItem bestItem = list[0];
-            TResult bestResult = f(list[0]);
-            foreach (TItem item in list)
-            {
-                TResult result = f(item);
-                if (result.CompareTo(bestResult)*sig > 0)
-                {
-                    bestResult = result;
-                    bestItem = item;
-                }
-            }
+            var bestItem = max
+            ? list.Aggregate((x, y) => f(x).CompareTo(f(y)) > 0 ? x : y)
+            : list.Aggregate((x, y) => f(x).CompareTo(f(y)) < 0 ? x : y);
             return bestItem;
         }
     }
