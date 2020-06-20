@@ -93,27 +93,18 @@ namespace InfrastructureDemo.Features.KMeans
         
     }
 
-    class KMeansSample : KMeans<PlainVector>
+    abstract class KMeansPlainVector : KMeans<PlainVector>
     {
         protected override string OutputVector(PlainVector v)
         {
             return $"X={v.X:0.000} Y={v.Y:0.000}";
         }
-
-        protected override void SetSequence()
-        {
-            string path = "InfrastructureDemo.Internal.KMeans.KMeansInput1.txt";
-            VectorSequence = IO.ReadEmbedClean(path).Select(x => new PlainVector { X = double.Parse(x[1]), Y = double.Parse(x[2]) }).ToArray();
-        }
-
         protected override double VectorDistance(PlainVector v1, PlainVector v2)
         {
             double dx = v1.X - v2.X;
             double dy = v1.Y - v2.Y;
             return Math.Sqrt(dx * dx + dy * dy);
         }
-
-
         protected override IEnumerable<PlainVector> OverallVectorMean()
         {
             int[] vectorCountDict = new int[K];
@@ -128,7 +119,6 @@ namespace InfrastructureDemo.Features.KMeans
             for (int i = 0; i < K; i++)
                 yield return new PlainVector { X = vectorXDict[i] / vectorCountDict[i], Y = vectorYDict[i] / vectorCountDict[i] };
         }
-
         protected override void Plot()
         {
             char[] Dot = { '@', '#', 'X' };
@@ -157,6 +147,49 @@ namespace InfrastructureDemo.Features.KMeans
             }
             if (Cfg.PrintVectors || Cfg.PrintMeans)
                 canvas.DrawPlain();
+        }
+    }
+    class KMeansSample : KMeansPlainVector
+    {
+        protected override void SetSequence()
+        {
+            string path = "InfrastructureDemo.Internal.KMeans.KMeansInput1.txt";
+            VectorSequence = IO.ReadEmbedClean(path).Select(x => new PlainVector { X = double.Parse(x[1]), Y = double.Parse(x[2]) }).ToArray();
+        }
+    }
+    class KMeansVerify : KMeansPlainVector
+    {
+        Random R = new Random();
+        protected override void SetSequence()
+        {
+            K = 3;
+            PlainVector K1 = new PlainVector { X = 0.3, Y = 0.2 };
+            PlainVector K2 = new PlainVector { X = 0.5, Y = 0.8 };
+            PlainVector K3 = new PlainVector { X = 0.7, Y = 0.4 };
+            var list1 = GeneratePlainVectors(K1, 500, 5, 0.05);
+            var list2 = GeneratePlainVectors(K2, 500, 5, 0.05);
+            var list3 = GeneratePlainVectors(K3, 500, 5, 0.05);
+            VectorSequence = list1.Concat(list2).Concat(list3).Shuffle();
+        }
+        private IEnumerable<PlainVector> GeneratePlainVectors(PlainVector center, int n, int k, double step)
+        {
+            for (int i = 0; i < n; i++)
+                yield return GeneratePlainVector(center, k, step);
+        }
+        private PlainVector GeneratePlainVector(PlainVector center, int k, double step)
+        {
+            double x = center.X;
+            double y = center.Y;
+            for(int i = 0; i < k; i++)
+            {
+                x += (R.NextDouble() * 2 - 1) * step;
+                y += (R.NextDouble() * 2 - 1) * step;
+            }
+            if (x < 0) x = 0;
+            if (x > 1) x = 0.99;
+            if (y < 0) y = 0;
+            if (y > 1) y = 0.99;
+            return new PlainVector { X = x, Y = y };
         }
     }
 }
