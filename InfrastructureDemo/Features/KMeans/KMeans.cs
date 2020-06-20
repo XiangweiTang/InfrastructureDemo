@@ -16,8 +16,7 @@ namespace InfrastructureDemo.Features.KMeans
         protected ConfigKMeans Cfg = new ConfigKMeans();
         protected Vector[] VectorSequence = null;
         protected int[] ClusterDistribute = null;
-        protected Vector[] ClusterMeans = null;
-        int[] KSeq = null;
+        protected Vector[] ClusterMeans = null;        
         protected int K = -1;
         bool ClusterChange = false;
         protected override void Load(Argument arg)
@@ -39,8 +38,7 @@ namespace InfrastructureDemo.Features.KMeans
             K = Cfg.K;
             ClusterDistribute = new int[VectorSequence.Length];
             Vector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
-            ClusterMeans = VectorSequence.RandomSampleTinyIndex(3).Select(x => VectorSequence[x]).ToArray();
-            KSeq = Enumerable.Range(0, K).ToArray();
+            ClusterMeans = VectorSequence.RandomSampleTinyIndex(3).Select(x => VectorSequence[x]).ToArray();            
         }
         
         private void Iteration()
@@ -62,7 +60,7 @@ namespace InfrastructureDemo.Features.KMeans
         {
             for (int i = 0; i < VectorSequence.Length; i++)
             {
-                int minIndex = KSeq.ArgMin((index) => VectorDist(VectorSequence[i], ClusterMeans[index]));
+                int minIndex = Enumerable.Range(0, K).ArgMin((index) => VectorDistance(VectorSequence[i], ClusterMeans[index]));
                 if (ClusterDistribute[i] != minIndex)
                 {
                     ClusterChange = true;
@@ -73,11 +71,11 @@ namespace InfrastructureDemo.Features.KMeans
         private double ResetClusterMean()
         {
             double totalDiff = 0;
-            var newMeans = VectorMean().ToArray();
+            var newMeans = OverallVectorMean().ToArray();
             Sanity.Requires(newMeans.Length == K, $"Reset cluster mean error, #(mean)={newMeans.Length}, expected K={K}.");
             for(int i = 0; i < K; i++)
             {
-                totalDiff += VectorDist(newMeans[i], ClusterMeans[i]);
+                totalDiff += VectorDistance(newMeans[i], ClusterMeans[i]);
                 ClusterMeans[i] = newMeans[i];
             }
             return totalDiff;
@@ -88,8 +86,8 @@ namespace InfrastructureDemo.Features.KMeans
                 Console.WriteLine(OutputVector(vector));
         }
         protected abstract void SetSequence();
-        protected abstract double VectorDist(Vector v1, Vector v2);
-        protected abstract IEnumerable<Vector> VectorMean();
+        protected abstract double VectorDistance(Vector v1, Vector v2);
+        protected abstract IEnumerable<Vector> OverallVectorMean();
         protected abstract string OutputVector(Vector v);
         protected virtual void Plot() { }
         
@@ -108,7 +106,7 @@ namespace InfrastructureDemo.Features.KMeans
             VectorSequence = IO.ReadEmbedClean(path).Select(x => new PlainVector { X = double.Parse(x[1]), Y = double.Parse(x[2]) }).ToArray();
         }
 
-        protected override double VectorDist(PlainVector v1, PlainVector v2)
+        protected override double VectorDistance(PlainVector v1, PlainVector v2)
         {
             double dx = v1.X - v2.X;
             double dy = v1.Y - v2.Y;
@@ -116,7 +114,7 @@ namespace InfrastructureDemo.Features.KMeans
         }
 
 
-        protected override IEnumerable<PlainVector> VectorMean()
+        protected override IEnumerable<PlainVector> OverallVectorMean()
         {
             int[] vectorCountDict = new int[K];
             double[] vectorXDict = new double[K];
@@ -160,11 +158,5 @@ namespace InfrastructureDemo.Features.KMeans
             if (Cfg.PrintVectors || Cfg.PrintMeans)
                 canvas.DrawPlain();
         }
-    }
-
-    struct PlainVector
-    {
-        public double X;
-        public double Y;
     }
 }
