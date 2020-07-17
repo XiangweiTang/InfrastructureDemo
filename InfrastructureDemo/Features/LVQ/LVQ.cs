@@ -41,7 +41,7 @@ namespace InfrastructureDemo.Features.LVQ
         {
             SetSequence();
             Q = TargetLabel.Length;
-            TargetVector = VectorSequence.RandomSampleTiny(Q, Q, 1);
+            TargetVector = VectorSequence.Shuffle();
         }
         private void Iteration()
         {

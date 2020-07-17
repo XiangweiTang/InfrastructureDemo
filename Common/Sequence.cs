@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace Common
 {
@@ -40,39 +41,60 @@ namespace Common
             list[j] = t;
         }
 
-        /// <summary>
-        /// Random sample some of the element from the sequence, and the sample count is tiny.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <param name="k"></param>
-        /// <param name="maxK"></param>
-        /// <param name="maxRatio"></param>
-        /// <returns></returns>
-        public static T[] RandomSampleTiny<T>(this IList<T> list, int k, int maxK = 10, double maxRatio = 0.15)
+        public static T[] ReservoirSampling<T>(this IEnumerable<T> sequence, int k)
         {
-            return RandomSampleTinyIndex(list, k, maxK, maxRatio).Select(x => list[x]).ToArray();
-        }
-
-        public static int[] RandomSampleTinyIndex<T>(this IList<T> list, int k, int maxK = 10, double maxRatio = 0.15)
-        {
-            Sanity.Requires(k <= maxK, $"The required k(${k}) is more than the upperbound of k({maxK}).");
-            Sanity.Requires(k <= list.Count * maxRatio, $"The required k(${k}) is more than the upperbound of sequence count({list.Count})*max ratio({maxRatio}).");
-            
-            HashSet<int> sampledSet = new HashSet<int>();
-            for (int i = 0; i < k; i++)
+            T[] reservoir = new T[k];
+            int i = 0;
+            foreach(T t in sequence)
             {
-                while (true)
+                if (i < k)
+                    reservoir[i] = t;
+                else
                 {
-                    int index = R.Next(list.Count);
-                    if (!sampledSet.Contains(index))
-                    {
-                        sampledSet.Add(index);                        
-                        break;
-                    }
+                    int j = R.Next(i);
+                    if (j < k)
+                        reservoir[j] = t;
+                }
+                i++;
+            }
+            if (i < k)
+                return reservoir.Take(i).ToArray();
+            return reservoir;
+        }        
+
+        public static void Partition<TInput, TClassifier>(this IEnumerable<TInput> sequence, Func<TInput,TClassifier> classifier, Dictionary<TClassifier,Action<IEnumerable<TInput>>> actionDict, int bufferSize = 10_000)
+        {
+            Dictionary<TClassifier, List<TInput>> bufferDict = actionDict.ToDictionary(x => x.Key, x => new List<TInput>(bufferSize));
+            foreach(TInput input in sequence)
+            {
+                TClassifier key = classifier(input);
+                bufferDict[key].Add(input);
+                if (bufferDict.Count >= bufferSize)
+                {
+                    actionDict[key](bufferDict[key]);
+                    bufferDict[key].Clear();
+                    bufferDict[key].Capacity = bufferSize;
                 }
             }
-            return sampledSet.ToArray();
+            foreach(TClassifier key in bufferDict.Keys)
+            {
+                if (bufferDict[key].Count > 0)
+                    actionDict[key](bufferDict[key]);
+            }
+        }
+
+        public static void PartitionByInteger<T>(this IEnumerable<T> sequence, Func<T,int> classifier,  Action<int,IEnumerable<T>> action, HashSet<int> classifierValues, int bufferSize = 10_000)
+        {
+            Dictionary<int, Action<IEnumerable<T>>> actionDict = classifierValues.ToDictionary(x => x, x => new Action<IEnumerable<T>>((IEnumerable<T> l) => action(x, l)));
+            sequence.Partition(classifier, actionDict, bufferSize);
+        }
+
+        public static void PartitionByHash<T>(this IEnumerable<T> sequence, Action<int, IEnumerable<T>> action, int maskBits = 6, int bufferSize = 10_000)
+        {
+            int mask = 1 << maskBits;
+            Func<T, int> classifier = x => x.GetHashCode() & (mask - 1);
+            HashSet<int> classifierValues = new HashSet<int>(Enumerable.Range(0, mask));
+            sequence.PartitionByInteger(classifier, action, classifierValues, bufferSize);
         }
     }
 }

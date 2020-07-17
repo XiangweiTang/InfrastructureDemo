@@ -38,7 +38,7 @@ namespace InfrastructureDemo.Features.KMeans
             K = Cfg.K;
             ClusterDistribute = new int[VectorSequence.Length];
             TVector[] bookSample= { VectorSequence[5], VectorSequence[11], VectorSequence[23] };
-            ClusterMeans = VectorSequence.RandomSampleTinyIndex(3).Select(x => VectorSequence[x]).ToArray();            
+            ClusterMeans = VectorSequence.ReservoirSampling(3).ToArray();            
         }
         
         private void Iteration()
