@@ -1,4 +1,0 @@
-﻿1	PCM
-2	ADPCM
-6	ALAW
-7	ULAW
