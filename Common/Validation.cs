@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common
 {
-    public static class Sanity
+    public static class Validation
     {
         public static void Requires(bool valid)
         {
