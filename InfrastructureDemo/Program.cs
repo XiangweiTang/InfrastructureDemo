@@ -10,7 +10,7 @@ namespace InfrastructureDemo
     {
         static void Main(string[] args)
         {
-            Test t = new Test();
+            Argument arg = new Argument(args);
         }
     }
 }
