@@ -10,7 +10,7 @@ namespace InfrastructureDemo
 {
     class Test
     {
-        public Test()
+        public Test(Argument arg)
         {
             
         }
