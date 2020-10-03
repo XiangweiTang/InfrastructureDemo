@@ -9,7 +9,7 @@ namespace Common
     /// <summary>
     /// Xml related operations.
     /// </summary>
-    public static class Xml
+    public static partial class Xml
     {
         /// <summary>
         /// Get a value from certain xpath and attribute name.
