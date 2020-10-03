@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace Common
 {
+    /// <summary>
+    /// These are the extensions of sequence.
+    /// They're supplement of the System.Linq. 
+    /// </summary>
     public static class Sequence
     {
         /// <summary>

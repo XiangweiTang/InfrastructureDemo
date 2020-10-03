@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Argument.cs" />
+    <Compile Include="ArgumentHelper.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="Feature\HelloWorld\ConfigHelloWorld.cs" />
@@ -62,6 +63,8 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Config.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

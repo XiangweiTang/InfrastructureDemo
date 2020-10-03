@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,16 @@ namespace InfrastructureDemo.HelloWorld
 {
     class HelloWorld : Feature
     {
+        ConfigHelloWorld Cfg = new ConfigHelloWorld();
         protected override void Load(Argument arg)
         {
-            throw new NotImplementedException();
+            Cfg.Load(arg);
         }
 
         protected override void Run()
         {
-            throw new NotImplementedException();
+            Logger.WriteLog("This is the HelloWorld for InfrastuctureDemo.");
+            Console.WriteLine($"Hello world {Cfg.Name}");
         }
     }
 }
