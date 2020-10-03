@@ -19,7 +19,7 @@ namespace InfrastructureDemo
         {
             if((Arg.Category&ArgumentCategory.Test)!=0)
             {
-                Test test = new Test(Arg);
+                _ = new Test(Arg);
             }
             else
             {
