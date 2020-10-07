@@ -11,7 +11,7 @@ namespace InfrastructureDemo
     abstract class Config
     {
         protected XmlNode TaskNode { get; private set; } = null;
-        public string TaskName { get; protected set; }
+        public string FeatureName { get; protected set; }
         public string PythonPath { get; private set; }
         protected XmlDocument XDoc = new XmlDocument();
         public void Load(Argument arg)
@@ -33,8 +33,8 @@ namespace InfrastructureDemo
             using (XmlReader xReader = XmlReader.Create(xmlPath, settings))
             {
                 XDoc.Load(xReader);
-                TaskName = XDoc["Root"].Attributes["FeatureName"].Value;
-                TaskNode = XDoc["Root"][TaskName];
+                FeatureName = XDoc["Root"].Attributes["FeatureName"].Value;
+                TaskNode = XDoc["Root"][FeatureName];
                 LoadTaskNode();
                 LoadCommonNode();
             }            
@@ -47,7 +47,7 @@ namespace InfrastructureDemo
         }
         public XmlDocument ExtractSubXDoc()
         {
-            XDoc["Root"].KeepNodeInXmlDoc(TaskName, "Common");
+            XDoc["Root"].KeepNodeInXmlDoc(FeatureName, "Common");
             return XDoc;
         }
     }
@@ -57,7 +57,7 @@ namespace InfrastructureDemo
         protected override void LoadXmlArg(string xmlPath)
         {
             XDoc.Load(xmlPath);
-            TaskName = XDoc["Root"].Attributes["FeatureName"].Value;
+            FeatureName = XDoc["Root"].Attributes["FeatureName"].Value;
         }
         protected override void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict)
         {            

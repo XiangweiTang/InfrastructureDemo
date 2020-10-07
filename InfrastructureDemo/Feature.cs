@@ -14,12 +14,18 @@ namespace InfrastructureDemo
         /// The work folder of the task. Typically in the tmp folder.
         /// </summary>
         public string WorkFolder { get; set; } = "";
+        protected TaskStatusLine StatusLine { get; set; } = new TaskStatusLine();
+        public Feature()
+        {
+            StatusLine.UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+        }
         /// <summary>
         /// Main thread for the feature.
         /// </summary>
         /// <param name="arg">The argument.</param>
         public void LoadAndRun(Argument arg)
         {
+            StatusLine.StartTime = DateTime.Now;
             Logger.LogPath = Path.Combine(WorkFolder, "Log.txt");
             Logger.ErrorPath = Path.Combine(WorkFolder, "Error.txt");
 
@@ -30,6 +36,8 @@ namespace InfrastructureDemo
             Logger.WriteLog("Start to run.");
             Run();
             Logger.WriteLog("Task is done.");
+            StatusLine.EndTime = DateTime.Now;
+            OutputStatusLine();
         }
 
         /// <summary>
@@ -49,5 +57,17 @@ namespace InfrastructureDemo
         /// Run main procedure.
         /// </summary>
         abstract protected void Run();
+        /// <summary>
+        /// Set the item count and feature name of the status line.
+        /// </summary>
+        abstract protected void SetStatusLine();
+        /// <summary>
+        /// Output the status to a certain file.
+        /// </summary>
+        private void OutputStatusLine()
+        {
+            string taskStatusFilePath = Path.Combine(WorkFolder, "TaskStatus.txt");
+            File.WriteAllText(taskStatusFilePath, StatusLine.Output());
+        }
     }
 }

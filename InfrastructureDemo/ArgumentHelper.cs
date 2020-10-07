@@ -70,7 +70,7 @@ namespace InfrastructureDemo
                 Logger.WriteLog("Press any key to continue.", false);
                 Console.ReadKey();
             }
-            var subTaskNames = cfg.TaskName.Split(',');
+            var subTaskNames = cfg.FeatureName.Split(',');
             foreach (string subTaskName in subTaskNames)
             {                
                 try

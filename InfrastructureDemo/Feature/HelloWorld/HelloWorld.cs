@@ -20,5 +20,11 @@ namespace InfrastructureDemo.HelloWorld
             Logger.WriteLog("This is the HelloWorld for InfrastuctureDemo.");
             Console.WriteLine($"Hello world {Cfg.Name}!");
         }
+
+        protected override void SetStatusLine()
+        {
+            StatusLine.FeatureName = Cfg.FeatureName;
+            StatusLine.ItemCount = 1;
+        }
     }
 }
