@@ -92,7 +92,7 @@ namespace Common
             {
                 foreach(TColumn c in newColumnSet)
                 {
-                    if (RowSet.Contains(r) && ColumnSet.Contains(C))
+                    if (RowSet.Contains(r) && ColumnSet.Contains(c))
                         newMatrix[r, c] = this[r, c];
                 }
             }
