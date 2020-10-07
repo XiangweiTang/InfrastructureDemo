@@ -29,7 +29,7 @@ namespace Common
         public LogLine(LogLineType t, string content):base()
         {
             LogType = t;
-            TimeStamp = new DateTime();
+            TimeStamp = DateTime.Now;
             Content = content;
         }
         /// <summary>
@@ -43,8 +43,8 @@ namespace Common
         /// <returns>The sequence of LogLine parts.</returns>
         protected override IEnumerable<object> GetLine()
         {
+            yield return TimeStamp.ToStringLog();
             yield return LogType;
-            yield return TimeStamp;
             yield return Content;
         }
         /// <summary>
@@ -53,8 +53,8 @@ namespace Common
         /// <param name="split">The split parts of the input line string.</param>
         protected override void SetLine(string[] split)
         {
-            LogType = EnumParse.ParseLogLineString(split[0]);
-            TimeStamp = DateTime.Parse(split[1]);
+            TimeStamp = DateTime.Parse(split[0]);
+            LogType = EnumParse.ParseLogLineString(split[1]);
             Content = split[2];
         }
     }    

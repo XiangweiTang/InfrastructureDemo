@@ -12,7 +12,7 @@ namespace InfrastructureDemo
         {
             Argument arg = new Argument(args);
             ArgumentHelper ah = new ArgumentHelper(arg);
-            ah.Run();
+            ah.RunMainProcess();
         }
     }
 }

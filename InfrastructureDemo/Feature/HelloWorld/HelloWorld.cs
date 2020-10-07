@@ -18,7 +18,7 @@ namespace InfrastructureDemo.HelloWorld
         protected override void Run()
         {
             Logger.WriteLog("This is the HelloWorld for InfrastuctureDemo.");
-            Console.WriteLine($"Hello world {Cfg.Name}");
+            Console.WriteLine($"Hello world {Cfg.Name}!");
         }
     }
 }

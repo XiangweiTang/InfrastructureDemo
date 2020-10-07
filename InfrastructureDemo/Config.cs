@@ -4,34 +4,67 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Common;
 
 namespace InfrastructureDemo
 {
     abstract class Config
     {
         protected XmlNode TaskNode { get; private set; } = null;
-        public abstract string TaskName { get; protected set; }        
+        public string TaskName { get; protected set; }
+        public string PythonPath { get; private set; }
+        protected XmlDocument XDoc = new XmlDocument();
         public void Load(Argument arg)
         {
             if ((arg.Category & ArgumentCategory.ConfigFile) != 0)
             {
+                Logger.WriteLog("Xml argument is enabled.");
                 LoadXmlArg(arg.ConfigFilePath);
             }
             if ((arg.Category & ArgumentCategory.ExternalArg) != 0)
+            {
+                Logger.WriteLog("Extra argument is enabled.");
                 LoadExtraArg(arg.FreeArgList, arg.ConstrainedArgDict);
+            }
         }
-        private void LoadXmlArg(string xmlPath)
+        protected virtual void LoadXmlArg(string xmlPath)
         {
             XmlReaderSettings settings = new XmlReaderSettings { IgnoreComments = true };
             using (XmlReader xReader = XmlReader.Create(xmlPath, settings))
             {
-                XmlDocument xDoc = new XmlDocument();
-                xDoc.Load(xReader);
-                TaskNode = xDoc["Root"][TaskName];
-                LoadXmlNode();
+                XDoc.Load(xReader);
+                TaskName = XDoc["Root"].Attributes["FeatureName"].Value;
+                TaskNode = XDoc["Root"][TaskName];
+                LoadTaskNode();
+                LoadCommonNode();
             }            
         }
-        protected abstract void LoadXmlNode();
+        protected abstract void LoadTaskNode();
         protected abstract void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict);
+        private void LoadCommonNode()
+        {
+            PythonPath = XDoc.GetXmlValue("Root/Common/Python", "Path");
+        }
+        public XmlDocument ExtractSubXDoc()
+        {
+            XDoc["Root"].KeepNodeInXmlDoc(TaskName, "Common");
+            return XDoc;
+        }
+    }
+
+    class DummyConfig : Config
+    {
+        protected override void LoadXmlArg(string xmlPath)
+        {
+            XDoc.Load(xmlPath);
+            TaskName = XDoc["Root"].Attributes["FeatureName"].Value;
+        }
+        protected override void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict)
+        {            
+        }
+
+        protected override void LoadTaskNode()
+        {            
+        }
     }
 }

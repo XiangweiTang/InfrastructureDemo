@@ -52,7 +52,17 @@ namespace InfrastructureDemo
             DeployArg(args);
             SetArgType();
         }
-
+        /// <summary>
+        /// The clone version for the argument class.
+        /// </summary>
+        /// <param name="arg">The argument to be cloned.</param>
+        public Argument(Argument arg)
+        {
+            Category = arg.Category;
+            ConstrainedArgDict = new Dictionary<string, string>(arg.ConstrainedArgDict);
+            FreeArgList = new List<string>(arg.FreeArgList);
+            ConfigFilePath = arg.ConfigFilePath;
+        }
         /// <summary>
         /// Deploy args into FreeArgList and ConstrainedArgDict
         /// FreeArg first, ConstrainedArg later.
