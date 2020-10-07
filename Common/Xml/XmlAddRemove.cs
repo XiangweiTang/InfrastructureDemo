@@ -36,16 +36,14 @@ namespace Common
         /// <param name="rootNode">The xml document.</param>
         /// <param name="keptNodeNames">The node names to be kept.</param>
         /// <returns>The new xml document after the kept.</returns>
-        public static XmlNode KeepNodeInXmlDoc(this XmlNode rootNode, params string[] keptNodeNames)
+        public static void KeepNodeInXmlDoc(this XmlNode rootNode, params string[] keptNodeNames)
         {
-            var dupe = rootNode.Clone();
-            for(int i = dupe.ChildNodes.Count - 1; i >= 0; i--)
+            for(int i = rootNode.ChildNodes.Count - 1; i >= 0; i--)
             {
-                var child = dupe.ChildNodes[i];
+                var child = rootNode.ChildNodes[i];
                 if (!keptNodeNames.Contains(child.Name))
-                    dupe.RemoveChild(child);
+                    rootNode.RemoveChild(child);
             }
-            return dupe;
         }
         /// <summary>
         /// Remove a node with certain name.

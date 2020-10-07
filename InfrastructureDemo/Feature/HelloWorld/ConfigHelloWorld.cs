@@ -12,8 +12,6 @@ namespace InfrastructureDemo.HelloWorld
     {
         public string Name { get; private set; } = "";
 
-        public override string TaskName { get => "HelloWorld"; protected set { } }
-
         /// <summary>
         /// Override the load extra arg.
         /// So HelloWorld feature can be called in this way:
@@ -30,7 +28,7 @@ namespace InfrastructureDemo.HelloWorld
         /// <summary>
         /// Override the load xml node.
         /// </summary>
-        protected override void LoadXmlNode()
+        protected override void LoadTaskNode()
         {
             Name = TaskNode.GetXmlValue("Name");
         }
