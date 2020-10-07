@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.xml" />
+    <EmbeddedResource Include="Internal\CostSaving.txt" />
     <EmbeddedResource Include="Internal\SampleData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
