@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Common
@@ -17,7 +18,7 @@ namespace Common
         /// <param name="arg">The argument string.</param>
         /// <param name="showWindow">Whether pop out new cmd window.</param>
         /// <param name="workDirectory">The work directory.</param>
-        public static void Run(string fileName, string arg, bool showWindow=false,string workDirectory = "")
+        public static void Run(string fileName, string arg, bool showWindow=false,string workDirectory = "", bool redirectOutput=true)
         {
             Process proc = new Process();
             proc.StartInfo = new ProcessStartInfo
@@ -26,8 +27,18 @@ namespace Common
                 Arguments = arg,
                 UseShellExecute = !showWindow,
                 WorkingDirectory = workDirectory,
+                RedirectStandardOutput = redirectOutput
             };
             proc.Start();
+            if (redirectOutput)
+            {
+                using(StreamReader sr = proc.StandardOutput)
+                {
+                    string line;
+                    while((line=sr.ReadLine())!=null)
+                        Console.WriteLine(line);
+                }
+            }
             proc.WaitForExit();
         }
 
@@ -39,9 +50,9 @@ namespace Common
         /// <param name="pythonArg">The argument string for python.</param>
         /// <param name="showWindow">Whether pop out new cmd window.</param>
         /// <param name="workDirectory">The work directory.</param>
-        public static void RunPython(string pythonPath, string scriptPath, string pythonArg, bool showWindow=false,string workDirectory = "")
+        public static void RunPython(string pythonPath, string scriptPath, string pythonArg, bool showWindow=true,string workDirectory = "")
         {
-            Run(pythonPath, $"{scriptPath} {pythonArg}", showWindow, workDirectory);
+            Run(pythonPath, $"{scriptPath} {pythonArg}", showWindow, workDirectory, true);
         }
     }
 }
