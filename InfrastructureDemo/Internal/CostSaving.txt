@@ -1,2 +1,3 @@
 ﻿#FeatureName[TAB]	Rate[TAB]	FeatureDescription[TAB]	ReportTemplate
 HelloWorld	0	This feature is the HelloWorld demo for InfrastructureDemo.	{0} second(s) cost saving per run. Totally {1} runs.
+HelloWorld	0	This feature is the HelloWorld in Python demo for InfrastructureDemo. {0} second(s) cost saving per run. Totally {1} runs.

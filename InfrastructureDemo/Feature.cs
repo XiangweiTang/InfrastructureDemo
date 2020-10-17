@@ -30,14 +30,16 @@ namespace InfrastructureDemo
             Logger.ErrorPath = Path.Combine(WorkFolder, "Error.txt");
 
             Logger.WriteLog("Start to load the argument.");
-            Load(arg);
+            Load(arg);            
             Logger.WriteLog("Argument is loaded.");
 
             Logger.WriteLog("Start to run.");
             Run();
-            Logger.WriteLog("Task is done.");
             StatusLine.EndTime = DateTime.Now;
+            SetStatusLine();
             OutputStatusLine();
+            ArchiveWorkStatus();
+            Logger.WriteLog("Task is done.");
         }
 
         /// <summary>
@@ -68,6 +70,18 @@ namespace InfrastructureDemo
         {
             string taskStatusFilePath = Path.Combine(WorkFolder, "TaskStatus.txt");
             File.WriteAllText(taskStatusFilePath, StatusLine.Output());
+        }
+
+        /// <summary>
+        /// Output the status to the archive folder.
+        /// </summary>
+        private void ArchiveWorkStatus()
+        {
+            DateTime now = DateTime.Now;
+            string archiveFolder = Path.Combine(Constants.WORK_STATUS_ARCHIVE_FOLDER, now.Year.ToString("0000"), now.Month.ToString("00"), now.Day.ToString("00"));
+            Directory.CreateDirectory(archiveFolder);
+            string archivePath = Path.Combine(archiveFolder, Guid.NewGuid().ToString() + ".txt");
+            File.WriteAllText(archivePath, StatusLine.Output());
         }
     }
 }
