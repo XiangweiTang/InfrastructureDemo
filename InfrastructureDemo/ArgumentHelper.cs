@@ -65,6 +65,7 @@ namespace InfrastructureDemo
             // Here we allow the multiple task names in a single run.
             // Each of the features are seperated by a comma.
             Logger.WriteLog("You're going to run the following task(s): ");
+            Logger.WriteLog(cfg.FeatureName);
             if (NeedConfirm)
             {
                 Logger.WriteLog("Press any key to continue.", false);
@@ -104,6 +105,8 @@ namespace InfrastructureDemo
             {
                 case "helloworld":
                     return new HelloWorld.HelloWorld();
+                case "helloworldpython":
+                    return new HelloWorldPython.HelloWorldPython();
                 case "NA":
                     return null;
                 default:

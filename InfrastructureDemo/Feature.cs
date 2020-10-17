@@ -41,7 +41,7 @@ namespace InfrastructureDemo
         }
 
         /// <summary>
-        /// This is for call the Run directly.
+        /// This is for call the Run directly. Mainly in test mod.
         /// </summary>
         public void TestRun()
         {
@@ -51,7 +51,7 @@ namespace InfrastructureDemo
         /// <summary>
         /// Load arguments.
         /// </summary>
-        /// <param name="arg"></param>
+        /// <param name="arg">The argument</param>
         abstract protected void Load(Argument arg);
         /// <summary>
         /// Run main procedure.

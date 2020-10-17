@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Root FeatureName="HelloWorld">
+<Root FeatureName="HelloWorldPython">
   <HelloWorld>
     <Name>Bobo</Name>
   </HelloWorld>
+  <HelloWorldPython>
+    <Name>Bobo</Name>
+  </HelloWorldPython>
   <Common>
-    <Python Path=""/>
+    <Python Path="C:\Users\tangx\AppData\Local\Programs\Python\Python36\python.exe"/>
   </Common>
 </Root>

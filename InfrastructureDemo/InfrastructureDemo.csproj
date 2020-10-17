@@ -48,6 +48,8 @@
     <Compile Include="ArgumentHelper.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Feature\HelloWorldPython\ConfigHelloWorldPython.cs" />
+    <Compile Include="Feature\HelloWorldPython\HelloWorldPython.cs" />
     <Compile Include="Feature\HelloWorld\ConfigHelloWorld.cs" />
     <Compile Include="Feature\HelloWorld\HelloWorld.cs" />
     <Compile Include="Program.cs" />
@@ -65,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.xml" />
+    <EmbeddedResource Include="Internal\HlloWorldPython\HelloWorld.py" />
     <EmbeddedResource Include="Internal\CostSaving.txt" />
     <EmbeddedResource Include="Internal\SampleData.txt" />
   </ItemGroup>
