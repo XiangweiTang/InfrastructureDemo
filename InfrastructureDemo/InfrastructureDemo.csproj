@@ -48,6 +48,7 @@
     <Compile Include="ArgumentHelper.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="FeatureCommon\Constants.cs" />
     <Compile Include="Feature\HelloWorldPython\ConfigHelloWorldPython.cs" />
     <Compile Include="Feature\HelloWorldPython\HelloWorldPython.cs" />
     <Compile Include="Feature\HelloWorld\ConfigHelloWorld.cs" />

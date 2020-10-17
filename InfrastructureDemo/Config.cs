@@ -33,7 +33,7 @@ namespace InfrastructureDemo
             using (XmlReader xReader = XmlReader.Create(xmlPath, settings))
             {
                 XDoc.Load(xReader);
-                FeatureName = XDoc["Root"].Attributes["FeatureName"].Value;
+                FeatureName = XDoc.GetXmlValue("Root", "FeatureName");
                 TaskNode = XDoc["Root"][FeatureName];
                 LoadTaskNode();
                 LoadCommonNode();

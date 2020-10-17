@@ -11,7 +11,6 @@ namespace InfrastructureDemo.HelloWorld
     class ConfigHelloWorld : Config
     {
         public string Name { get; private set; } = "";
-
         /// <summary>
         /// Override the load extra arg.
         /// So HelloWorld feature can be called in this way:
