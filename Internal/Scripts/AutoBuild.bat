@@ -1,6 +1,7 @@
+set initPath = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
 set reposPath = %USERPROFILE%\source\repos\InfrastructureDemo
 set outputPath = d:\public\tools
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
+call %initPath%
 pushd %reposPath%
 git checkout -- .
 git checkout master
