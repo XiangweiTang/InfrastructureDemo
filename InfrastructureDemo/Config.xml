@@ -9,8 +9,12 @@
   <CostSaving>
     <StartTime>2020/07/01</StartTime>
     <EndTime>2020/10/31</EndTime>
-    <OutputFolder Path=""/>
+    <OutputFolder Path="D:\tmp\Archive"/>
   </CostSaving>
+  <UpdateConfig>
+    <InputConfig Path="D:\tmp\Archive\Config.xml"/>
+    <OutputConfig Path="D:\tmp\Archive\NewConfig.xml"/>
+  </UpdateConfig>
   <Common>
     <Python Path="C:\Users\tangx\AppData\Local\Programs\Python\Python36\python.exe"/>
   </Common>
