@@ -40,7 +40,7 @@ namespace InfrastructureDemo
             }            
         }
         protected abstract void LoadTaskNode();
-        protected abstract void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict);
+        protected virtual void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict) { }
         private void LoadCommonNode()
         {
             PythonPath = XDoc.GetXmlValue("Root/Common/Python", "Path");

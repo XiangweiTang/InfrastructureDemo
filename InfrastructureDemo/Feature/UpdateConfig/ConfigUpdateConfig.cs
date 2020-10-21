@@ -9,13 +9,17 @@ namespace InfrastructureDemo.UpdateConfig
 {
     class ConfigUpdateConfig : Config
     {
+        /// <summary>
+        /// The input config, or the old config path.
+        /// </summary>
         public string InputConfigPath { get; private set; }
+        /// <summary>
+        /// The output config, or the new config path.
+        /// </summary>
         public string OutputConfigPath { get; private set; }
-        protected override void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict)
-        {
-            // DO NOTHING.
-        }
-
+        /// <summary>
+        /// Load the task node.
+        /// </summary>
         protected override void LoadTaskNode()
         {
             InputConfigPath = TaskNode.GetXmlValue("InputConfig", "Path");
