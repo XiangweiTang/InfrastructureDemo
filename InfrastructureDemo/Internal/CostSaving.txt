@@ -1,4 +1,5 @@
 ﻿#FeatureName[TAB]	Rate[TAB]	FeatureDescription[TAB]	ReportTemplate
 HelloWorld	0	This feature is the HelloWorld demo for InfrastructureDemo.	{0} second(s) cost saving per run. Totally {1} runs.
-HelloWorldPython	0	This feature is the HelloWorld in Python demo for InfrastructureDemo. {0} second(s) cost saving per run. Totally {1} runs.
+HelloWorldPython	0	This feature is the HelloWorld in Python demo for InfrastructureDemo.	{0} second(s) cost saving per run. Totally {1} runs.
 CostSaving	3600	This feature is the tool to calculate the cost saving for all the recorded tasks.	{0} second(s) cost saving per run. Totally {1} runs.
+UpdateConfig	300	This feature is the tool to update the config to the latest version.	{0} second(s) cost saving per run. Totally {1} runs.

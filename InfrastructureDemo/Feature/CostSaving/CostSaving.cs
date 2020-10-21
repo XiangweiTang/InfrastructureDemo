@@ -98,6 +98,10 @@ namespace InfrastructureDemo.CostSaving
                     WorkItemCountDict[record.FeatureName] = record.ItemCount;
             }
 
+            // This key is "CostSaving".
+            // Cost saving work item count is always 1(by design).
+            WorkItemCountDict[Cfg.FeatureName] = 1;
+
             foreach(var item in CostSavingDefDict)
             {
                 // For each of the CostSaving definition, calculate how many work items are there.

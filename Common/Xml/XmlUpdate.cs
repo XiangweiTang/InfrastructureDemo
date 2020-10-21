@@ -38,7 +38,7 @@ namespace Common
                 }
             }
             // HACK: If the value node and strucuture node has different structures, there might be error here.
-            if (structureXmlNode.InnerText == structureXmlNode.ChildNodes[0].Value)
+            if (structureXmlNode.ChildNodes.Count > 0 && structureXmlNode.InnerText == structureXmlNode.ChildNodes[0].Value)
                 structureXmlNode.InnerText = valueXmlNode.InnerText;
             for(int i = 0; i < structureXmlNode.ChildNodes.Count; i++)
             {
