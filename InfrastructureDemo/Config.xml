@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Root FeatureName="NA">
   <HelloWorld>
-    <Name>Bobo</Name>
+    <Name>InfrastructureDemo</Name>
   </HelloWorld>
   <HelloWorldPython>
     <Name>Bobo</Name>

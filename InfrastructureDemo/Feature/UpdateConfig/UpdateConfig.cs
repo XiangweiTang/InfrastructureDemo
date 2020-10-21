@@ -43,6 +43,9 @@ namespace InfrastructureDemo.UpdateConfig
             // Merge the config.
             outputXdoc.XmlMerge(inputXdoc);
 
+            // Reset the feature name back to NA, to avoid mis-operation.
+            outputXdoc["Root"].Attributes["FeatureName"].Value = "NA";
+
             // Save the config to the required path.
             outputXdoc.Save(Cfg.OutputConfigPath);
         }

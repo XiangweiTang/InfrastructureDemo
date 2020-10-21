@@ -21,7 +21,7 @@ namespace Common
         /// <param name="withRowHeader">Whether to output row header or not.</param>
         /// <param name="withColumnHeader">Whether to output column header or not.</param>
         /// <returns>The output text.</returns>
-        public static IEnumerable<string> ToText<TRow, TColumn, TValue>(Matrix<TRow, TColumn, TValue> matrix, bool withRowHeader = true, bool withColumnHeader = true)
+        public static IEnumerable<string> ToText<TRow, TColumn, TValue>(this Matrix<TRow, TColumn, TValue> matrix, bool withRowHeader = true, bool withColumnHeader = true)
         {
             StringBuilder sb = new StringBuilder();
             if (withColumnHeader)
