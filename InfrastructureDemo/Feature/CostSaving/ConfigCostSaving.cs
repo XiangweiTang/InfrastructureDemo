@@ -9,14 +9,22 @@ namespace InfrastructureDemo.CostSaving
 {
     class ConfigCostSaving : Config
     {
+        /// <summary>
+        /// The start time of the cost saving statistic time span.
+        /// </summary>
         public DateTime StartTime { get; private set; }
+        /// <summary>
+        /// The end time of the cost saving statistic time span.
+        /// </summary>
         public DateTime EndTime { get; private set; }
+        /// <summary>
+        /// The output folder of the cost saving summarize.
+        /// </summary>
         public string OutputFolderPath { get; private set; }
-        protected override void LoadExtraArg(List<string> freeArgList, Dictionary<string, string> constrainedArgDict)
-        {
-            // Do nothing.
-        }
 
+        /// <summary>
+        /// Load the task node.
+        /// </summary>
         protected override void LoadTaskNode()
         {
             StartTime = DateTime.ParseExact(TaskNode.GetXmlValue("StartTime"), "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
