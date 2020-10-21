@@ -78,7 +78,7 @@ namespace InfrastructureDemo.CostSaving
         {
             Directory.CreateDirectory(Cfg.OutputFolderPath);
             string detailPath = Path.Combine(Cfg.OutputFolderPath, "CostSavingDetail.txt");
-            string overallPath = Path.Combine(Cfg.OutputFolderPath, "Overall.txt");
+            string overallPath = Path.Combine(Cfg.OutputFolderPath, "CostSavingOverall.txt");
             File.WriteAllLines(detailPath, DetailList);
             File.WriteAllLines(overallPath, OverallList);
         }
