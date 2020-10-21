@@ -10,6 +10,7 @@ namespace Common
         public double Rate { get; set; } = 0;
         public string FeatureDescription { get; set; } = "";
         public string ReportTemplate { get; set; } = "";
+        public CostSavingLine(string line) : base(line) { }
         protected override IEnumerable<object> GetLine()
         {
             yield return FeatureName;

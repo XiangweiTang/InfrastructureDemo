@@ -11,6 +11,7 @@ namespace Common
         public string UserName { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public TaskStatusLine(string line) : base(line) { }
         protected override IEnumerable<object> GetLine()
         {
             yield return FeatureName;

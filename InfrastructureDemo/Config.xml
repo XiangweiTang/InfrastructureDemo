@@ -6,6 +6,11 @@
   <HelloWorldPython>
     <Name>Bobo</Name>
   </HelloWorldPython>
+  <CostSaving>
+    <StartTime>2020/07/01</StartTime>
+    <EndTime>2020/10/31</EndTime>
+    <OutputFolder Path=""/>
+  </CostSaving>
   <Common>
     <Python Path="C:\Users\tangx\AppData\Local\Programs\Python\Python36\python.exe"/>
   </Common>

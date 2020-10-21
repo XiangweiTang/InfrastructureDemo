@@ -57,7 +57,7 @@ namespace InfrastructureDemo.HelloWorldPython
         /// </summary>
         protected override void SetStatusLine()
         {
-            StatusLine.FeatureName = "HelloWorldPython";
+            StatusLine.FeatureName = Cfg.FeatureName;
             StatusLine.ItemCount = 1;
         }
     }
