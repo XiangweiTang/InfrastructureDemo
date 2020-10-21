@@ -72,6 +72,8 @@ namespace InfrastructureDemo
                 Console.ReadKey();
             }
             var subTaskNames = cfg.FeatureName.Split(',');
+
+            // Split the main task into small subtasks.
             foreach (string subTaskName in subTaskNames)
             {                
                 try
@@ -99,6 +101,11 @@ namespace InfrastructureDemo
             }
         }
 
+        /// <summary>
+        /// Get the feature name.
+        /// </summary>
+        /// <param name="featureName">The name of the feature.</param>
+        /// <returns>The feature withe the respective name.</returns>
         private Feature GetFeature(string featureName)
         {
             switch (featureName.ToLower())
@@ -107,7 +114,10 @@ namespace InfrastructureDemo
                     return new HelloWorld.HelloWorld();
                 case "helloworldpython":
                     return new HelloWorldPython.HelloWorldPython();
+                case "costsaving":
+                    return new CostSaving.CostSaving();                    
                 case "NA":
+                    // NA is a safty exit, do nothing but continue without error.
                     return null;
                 default:
                     throw new InfException($"Invalid feature name: {featureName}.");
