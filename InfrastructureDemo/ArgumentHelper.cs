@@ -131,8 +131,8 @@ namespace InfrastructureDemo
                     return new UpdateConfig.UpdateConfig();
                 case "newhelloworld":
                     return new NewHelloWorld.NewHelloWorld();
-                //case "newhelloworldpython":
-                //    return new NewHelloWorldPython.NewHelloWorldPython();
+                case "newhelloworldpython":
+                    return new NewHelloWorldPython.NewHelloWorldPython();
                 case "NA":
                     // NA is a safty exit, do nothing but continue without error.
                     return null;
