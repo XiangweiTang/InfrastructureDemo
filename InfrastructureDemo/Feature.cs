@@ -40,8 +40,8 @@ namespace InfrastructureDemo
             OutputStatusLine();
             ArchiveWorkStatus();
             Logger.WriteLog("Task is done.");
-            //Logger.WriteLog("We add something new here!");
-            //Logger.WriteLog("**************************");
+            Logger.WriteLog("We add something new here!");
+            Logger.WriteLog("**************************");
             Logger.WriteLog("Press any key to quit.");
             Console.ReadKey();
         }
