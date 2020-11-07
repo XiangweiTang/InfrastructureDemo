@@ -60,6 +60,11 @@ namespace InfrastructureDemo
 
         private void RunConfigFileMod(Argument arg)
         {
+            if(!File.Exists(arg.ConfigFilePath))
+            {
+                OutputInitConfig(arg.ConfigFilePath);
+                return;
+            }
             DummyConfig cfg = new DummyConfig();
             cfg.Load(arg);
             // Here we allow the multiple task names in a single run.
@@ -101,6 +106,12 @@ namespace InfrastructureDemo
             }
         }
 
+        private void OutputInitConfig(string configPath)
+        {
+            var l = IO.ReadEmbed("InfrastructureDemo.Config.xml", "InfrastructureDemo");
+            File.WriteAllLines(configPath, l);
+        }
+
         /// <summary>
         /// Get the feature name.
         /// </summary>
@@ -118,6 +129,10 @@ namespace InfrastructureDemo
                     return new CostSaving.CostSaving();
                 case "updateconfig":
                     return new UpdateConfig.UpdateConfig();
+                case "newhelloworld":
+                    return new NewHelloWorld.NewHelloWorld();
+                case "newhelloworldpython":
+                    return new NewHelloWorldPython.NewHelloWorldPython();
                 case "NA":
                     // NA is a safty exit, do nothing but continue without error.
                     return null;

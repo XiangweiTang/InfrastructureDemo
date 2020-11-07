@@ -55,6 +55,10 @@
     <Compile Include="Feature\HelloWorldPython\HelloWorldPython.cs" />
     <Compile Include="Feature\HelloWorld\ConfigHelloWorld.cs" />
     <Compile Include="Feature\HelloWorld\HelloWorld.cs" />
+    <Compile Include="Feature\NewHelloWorldPython\ConfigNewHelloWorldPython.cs" />
+    <Compile Include="Feature\NewHelloWorldPython\NewHelloWorldPython.cs" />
+    <Compile Include="Feature\NewHelloWorld\ConfigNewHelloWorld.cs" />
+    <Compile Include="Feature\NewHelloWorld\NewHelloWorld.cs" />
     <Compile Include="Feature\UpdateConfig\ConfigUpdateConfig.cs" />
     <Compile Include="Feature\UpdateConfig\UpdateConfig.cs" />
     <Compile Include="Program.cs" />
@@ -72,9 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config.xml" />
-    <EmbeddedResource Include="Internal\HlloWorldPython\HelloWorld.py" />
+    <EmbeddedResource Include="Internal\HelloWorldPython\HelloWorld.py" />
     <EmbeddedResource Include="Internal\CostSaving.txt" />
     <EmbeddedResource Include="Internal\SampleData.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Internal\NewHelloWorldPython\NewHelloWorld.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

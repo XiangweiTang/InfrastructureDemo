@@ -36,7 +36,7 @@ namespace InfrastructureDemo.HelloWorldPython
             // Output the python script to the tmp folder.
             HelloWorldPythonScriptPath = Path.Combine(WorkFolder, "HelloWorld.py");
             // Read the content from the embeded resource.
-            var pythonContent = IO.ReadEmbed("InfrastructureDemo.Internal.HlloWorldPython.HelloWorld.py", "InfrastructureDemo");
+            var pythonContent = IO.ReadEmbed("InfrastructureDemo.Internal.HelloWorldPython.HelloWorld.py", "InfrastructureDemo");
             // Print the python script.
             File.WriteAllLines(HelloWorldPythonScriptPath, pythonContent);
         }
