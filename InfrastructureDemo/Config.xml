@@ -1,21 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Root FeatureName="NA">
   <HelloWorld>
-    <Name>InfrastructureDemo</Name>
+    <Name>NAME_ARG</Name>
   </HelloWorld>
   <HelloWorldPython>
-    <Name>Bobo</Name>
+    <Name>NAME_ARG</Name>
   </HelloWorldPython>
-  <CostSaving>
-    <StartTime>2020/07/01</StartTime>
-    <EndTime>2020/10/31</EndTime>
-    <OutputFolder Path="D:\tmp\Archive"/>
-  </CostSaving>
   <UpdateConfig>
-    <InputConfig Path="D:\tmp\Archive\Config.xml"/>
-    <OutputConfig Path="D:\tmp\Archive\NewConfig.xml"/>
+    <InputConfig Path="\\PATH\OF\INPUT_CONFIG"/>
+    <OutputConfig Path="\\PATH\OF\OUTPUT_CONFIG"/>
   </UpdateConfig>
+  <CostSaving>
+    <StartTime>START_TIME</StartTime>
+    <EndTime>END_TIME</EndTime>
+    <OutputFolder Path="\\OUTPUT_FOLDER"/>
+  </CostSaving>
+  <NewHelloWorld>
+    <Name>NAME_ARG</Name>
+    <Repeat>5</Repeat>
+  </NewHelloWorld>
+  <NewHelloWorldPython>
+    <Name>NAME_ARG</Name>
+    <Repeat>5</Repeat>
+  </NewHelloWorldPython>
   <Common>
-    <Python Path="C:\Users\tangx\AppData\Local\Programs\Python\Python36\python.exe"/>
+    <Python Path="\\LOCAL\PYTHON\PATH"/>
   </Common>
 </Root>

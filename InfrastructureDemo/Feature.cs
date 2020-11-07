@@ -17,7 +17,7 @@ namespace InfrastructureDemo
         protected TaskStatusLine StatusLine { get; set; } = new TaskStatusLine();
         public Feature()
         {
-            StatusLine.UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            StatusLine.UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\').Last();
         }
         /// <summary>
         /// Main thread for the feature.
@@ -40,6 +40,8 @@ namespace InfrastructureDemo
             OutputStatusLine();
             ArchiveWorkStatus();
             Logger.WriteLog("Task is done.");
+            Logger.WriteLog("Press any key to quit.");
+            Console.ReadKey();
         }
 
         /// <summary>
