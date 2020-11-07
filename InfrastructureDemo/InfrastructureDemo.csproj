@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Internal\NewHelloWorldPython\NewHelloWorld.py" />
+    <EmbeddedResource Include="Internal\NewHelloWorldPython\NewHelloWorld.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
