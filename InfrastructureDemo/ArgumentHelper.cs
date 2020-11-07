@@ -129,8 +129,10 @@ namespace InfrastructureDemo
                     return new CostSaving.CostSaving();
                 case "updateconfig":
                     return new UpdateConfig.UpdateConfig();
-                //case "newhelloworld":
-                //    return new NewHelloWorld.NewHelloWorld();
+                case "newhelloworld":
+                    return new NewHelloWorld.NewHelloWorld();
+                //case "newhelloworldpython":
+                //    return new NewHelloWorldPython.NewHelloWorldPython();
                 case "NA":
                     // NA is a safty exit, do nothing but continue without error.
                     return null;

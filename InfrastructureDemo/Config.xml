@@ -19,6 +19,10 @@
     <Name>NAME_ARG</Name>
     <Repeat>5</Repeat>
   </NewHelloWorld>
+  <NewHelloWorldPython>
+    <Name>NAME_ARG</Name>
+    <Repeat>5</Repeat>
+  </NewHelloWorldPython>
   <Common>
     <Python Path="\\LOCAL\PYTHON\PATH"/>
   </Common>
