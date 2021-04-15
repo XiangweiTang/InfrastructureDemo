@@ -3,7 +3,7 @@
     /// <summary>
     /// Class for constants.
     /// </summary>
-    public static class Constants
+    public static class FeatureConstants
     {
         /// <summary>
         /// The folder for archive the data.

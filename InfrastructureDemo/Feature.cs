@@ -82,7 +82,7 @@ namespace InfrastructureDemo
         private void ArchiveWorkStatus()
         {
             DateTime now = DateTime.Now;
-            string archiveFolder = Path.Combine(Constants.WORK_STATUS_ARCHIVE_FOLDER, now.Year.ToString("0000"), now.Month.ToString("00"), now.Day.ToString("00"));
+            string archiveFolder = Path.Combine(FeatureConstants.WORK_STATUS_ARCHIVE_FOLDER, now.Year.ToString("0000"), now.Month.ToString("00"), now.Day.ToString("00"));
             Directory.CreateDirectory(archiveFolder);
             string archivePath = Path.Combine(archiveFolder, Guid.NewGuid().ToString() + ".txt");
             File.WriteAllText(archivePath, StatusLine.Output());

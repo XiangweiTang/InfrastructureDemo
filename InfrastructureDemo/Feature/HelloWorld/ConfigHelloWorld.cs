@@ -5,10 +5,12 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using System.Xml.Serialization;
 
 namespace InfrastructureDemo.HelloWorld
 {
-    class ConfigHelloWorld : Config
+    [XmlRoot("HelloWorld")]
+    public class ConfigHelloWorld : Config
     {
         public string Name { get; private set; } = "";
         /// <summary>

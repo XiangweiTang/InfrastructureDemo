@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace InfrastructureDemo
 {
@@ -83,7 +84,7 @@ namespace InfrastructureDemo
             {                
                 try
                 {
-                    Feature feature = GetFeature(subTaskName);
+                    var feature = GetFeature(subTaskName);
                     if (feature == null)
                     {
                         Logger.WriteLog("The feature is NA, skip.");
@@ -119,26 +120,15 @@ namespace InfrastructureDemo
         /// <returns>The feature withe the respective name.</returns>
         private Feature GetFeature(string featureName)
         {
-            switch (featureName.ToLower())
-            {
-                case "helloworld":
-                    return new HelloWorld.HelloWorld();
-                case "helloworldpython":
-                    return new HelloWorldPython.HelloWorldPython();
-                case "costsaving":
-                    return new CostSaving.CostSaving();
-                case "updateconfig":
-                    return new UpdateConfig.UpdateConfig();
-                case "newhelloworld":
-                    return new NewHelloWorld.NewHelloWorld();
-                case "newhelloworldpython":
-                    return new NewHelloWorldPython.NewHelloWorldPython();
-                case "NA":
-                    // NA is a safty exit, do nothing but continue without error.
-                    return null;
-                default:
-                    throw new InfException($"Invalid feature name: {featureName}.");
-            }
+            if (featureName.ToUpper() == Constants.NA)
+                return null;
+            var dict = AppDomain.CurrentDomain.GetAssemblies()
+                .Single(x => x.GetName().Name == "InfrastructureDemo")
+                .GetTypes()
+                .Where(x=>x.IsSubclassOf(typeof(Feature)))
+                .ToDictionary(x => x.Name, x => x);
+            Validation.Requires(dict.ContainsKey(featureName), $"{featureName} is not a valid feature name.");
+            return (Feature)dict[featureName].GetConstructor(new Type[0]).Invoke(new object[0]);
         }
     }
 }

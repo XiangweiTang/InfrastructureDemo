@@ -8,7 +8,7 @@ using Common;
 
 namespace InfrastructureDemo
 {
-    abstract class Config
+    public abstract class Config
     {
         protected XmlNode TaskNode { get; private set; } = null;
         public string FeatureName { get; protected set; }

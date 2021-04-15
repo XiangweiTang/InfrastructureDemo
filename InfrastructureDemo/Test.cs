@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using System.Reflection;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace InfrastructureDemo
 {
@@ -35,6 +38,11 @@ namespace InfrastructureDemo
             foreach (string s in list)
                 Console.WriteLine(s);
             */
+            XmlSerializer xs = new XmlSerializer(typeof(HelloWorld.ConfigHelloWorld));
+            using (StreamWriter sw = new StreamWriter("1.xml"))
+            {
+                xs.Serialize(sw, new HelloWorld.ConfigHelloWorld());
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Root FeatureName="NA">
+<Root FeatureName="HelloWorld">
   <HelloWorld>
     <Name>NAME_ARG</Name>
   </HelloWorld>
@@ -25,5 +25,6 @@
   </NewHelloWorldPython>
   <Common>
     <Python Path="\\LOCAL\PYTHON\PATH"/>
+    <TmpFolder Path=""/>
   </Common>
 </Root>

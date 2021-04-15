@@ -137,7 +137,7 @@ namespace InfrastructureDemo.CostSaving
         {
             for(DateTime dt = Cfg.StartTime; dt <= Cfg.EndTime; dt = dt.AddDays(1))
             {
-                string dateFolderPath = Path.Combine(Constants.WORK_STATUS_ARCHIVE_FOLDER, dt.Year.ToString("0000"), dt.Month.ToString("00"), dt.Day.ToString("00"));
+                string dateFolderPath = Path.Combine(FeatureConstants.WORK_STATUS_ARCHIVE_FOLDER, dt.Year.ToString("0000"), dt.Month.ToString("00"), dt.Day.ToString("00"));
                 if (Directory.Exists(dateFolderPath))
                 {
                     foreach(string archiveFilePath in Directory.EnumerateFiles(dateFolderPath))
